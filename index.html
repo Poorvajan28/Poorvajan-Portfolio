@@ -1,148 +1,714 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Poorvajan G S | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/a2e0cfb5db.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poorvajan G S | Enhanced Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 </head>
 <body>
-  <div class="background-overlay"></div>
-  <header id="hero">
-    <nav>
-      <h1>Poorvajan G S</h1>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#internships">Internships</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Animated Particles -->
+    <div id="particles-container"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="cube">
+                <div class="face"></div>
+                <div class="face"></div>
+                <div class="face"></div>
+                <div class="face"></div>
+                <div class="face"></div>
+                <div class="face"></div>
+            </div>
+            <h3>Loading Portfolio...</h3>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1 class="logo-text">Poorvajan G S</h1>
+                <div class="logo-underline"></div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+                <li class="nav-item"><a href="#internships" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
-    <section class="hero-content">
-      <img src="profile.jpg" alt="Profile Picture" class="profile-img" />
 
-      <div class="social-icons" style="text-align: center; margin-top: 15px;">
-        <a href="https://www.linkedin.com/in/poorvajan-g-s-98a1a1269?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-           target="_blank" class="social-icon linkedin">
-          <i class="fab fa-linkedin fa-2x"></i>
-        </a>
-        <a href="https://github.com/Poorvajan28" target="_blank" class="social-icon github">
-          <i class="fab fa-github fa-2x"></i>
-        </a>
-      </div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="profile-container" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="profile-ring"></div>
+                <div class="profile-ring-2"></div>
+                <img src="profile.jpg" alt="Profile Picture" class="profile-img">
+                <div class="profile-glow"></div>
+            </div>
+            
+            <div class="hero-text" data-aos="fade-up" data-aos-delay="300">
+                <h1 class="hero-title">
+                    <span class="text-gradient">Hello, I'm</span>
+                    <br>
+                    <span class="name-text">Poorvajan G S</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="typing-text"></span>
+                    <span class="cursor">|</span>
+                </p>
+                <p class="hero-description">
+                    Crafting smart, intuitive, and elegant digital experiences with cutting-edge technology.
+                </p>
+            </div>
 
+            <div class="hero-cta" data-aos="fade-up" data-aos-delay="600">
+                <button class="cta-btn primary-btn" onclick="document.getElementById('modal').style.display='flex'">
+                    <span>Hire Me</span>
+                    <i class="fas fa-rocket"></i>
+                </button>
+                <button class="cta-btn secondary-btn" onclick="document.getElementById('contact').scrollIntoView()">
+                    <span>Let's Connect</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
 
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-      
-
-      <h2>Final Year B.E. CSE Student</h2>
-      <p>Crafting smart, intuitive, and elegant digital experiences.</p>
-      <button class="btn" onclick="document.getElementById('modal').style.display='flex'">Hire Me</button>
+            <div class="social-links" data-aos="fade-up" data-aos-delay="800">
+                <a href="https://www.linkedin.com/in/poorvajan-g-s-98a1a1269" target="_blank" class="social-link linkedin">
+                    <i class="fab fa-linkedin"></i>
+                    <span class="tooltip">LinkedIn</span>
+                </a>
+                <a href="https://github.com/Poorvajan28" target="_blank" class="social-link github">
+                    <i class="fab fa-github"></i>
+                    <span class="tooltip">GitHub</span>
+                </a>
+                <a href="mailto:poorvajan28@gmail.com" class="social-link email">
+                    <i class="fas fa-envelope"></i>
+                    <span class="tooltip">Email</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
     </section>
-  </header>
 
-  <section id="about" class="section fade-in">
-    <h2>About Me</h2>
-    <p>
-      I’m a passionate final-year B.E. CSE student with expertise in both web and mobile application
-      development. I build elegant UIs and seamless backends using Android, Flutter,
-      HTML/CSS, JavaScript, Python, PowerBI and MySQL.
-    </p>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-subtitle">Get to know me better</div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <div class="about-card">
+                        <div class="card-glow"></div>
+                        <p>
+                            I'm a passionate final-year B.E. CSE student with expertise in both web and mobile application
+                            development. I build elegant UIs and seamless backends using modern technologies like
+                            Android, Flutter, HTML/CSS, JavaScript, Python, PowerBI, and MySQL.
+                        </p>
+                        <p>
+                            My journey in technology started with curiosity and has evolved into a passion for creating
+                            innovative solutions that make a difference. I believe in continuous learning and staying
+                            updated with the latest technological trends.
+                        </p>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">5+</div>
+                                <div class="stat-label">Internships</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">10+</div>
+                                <div class="stat-label">Technologies</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3+</div>
+                                <div class="stat-label">Years Learning</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual" data-aos="fade-left">
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                        <div class="shape shape-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="skills" class="section fade-in">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><i class="fab fa-java"></i><span>Java</span></div>
-      <div class="skill-card"><i class="fab fa-js"></i><span>JavaScript</span></div>
-      <div class="skill-card"><i class="fab fa-python"></i><span>Python</span></div>
-      <div class="skill-card"><i class="fas fa-chart-line"></i><span>PowerBI</span></div>
-      <div class="skill-card"><i class="fab fa-android"></i><span>Android</span></div>
-      <div class="skill-card"><i class="fas fa-mobile-alt"></i><span>Flutter</span></div>
-      <div class="skill-card"><i class="fas fa-database"></i><span>MySQL</span></div>
-      <div class="skill-card"><i class="fab fa-html5"></i><span>HTML</span></div>
-      <div class="skill-card"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
-      <div class="skill-card"><i class="fas fa-pencil-ruler"></i><span>UI/UX</span></div>
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="section-subtitle">My technical expertise</div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                        <div class="skill-icon">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <h3>Java</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                        <div class="skill-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <h3>JavaScript</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="80"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
+                        <div class="skill-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3>Python</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>PowerBI</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="75"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="500">
+                        <div class="skill-icon">
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <h3>Android</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="600">
+                        <div class="skill-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Flutter</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="80"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="700">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>MySQL</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="800">
+                        <div class="skill-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h3>HTML5</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="900">
+                        <div class="skill-icon">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h3>CSS3</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="flip-left" data-aos-delay="1000">
+                        <div class="skill-icon">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <h3>UI/UX</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">Education</h2>
+                <div class="section-subtitle">My academic journey</div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <h3>B.E. Computer Science Engineering</h3>
+                                <span class="year">2022 - 2026</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="institution">KSR Institute for Engineering and Technology</p>
+                                <p class="grade">CGPA: 7.56</p>
+                                <div class="highlights">
+                                    <span class="highlight">Final Year Student</span>
+                                    <span class="highlight">Specialized in Software Development</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <h3>Higher Secondary Education</h3>
+                                <span class="year">12th Grade</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="grade">Percentage: 63%</p>
+                                <div class="highlights">
+                                    <span class="highlight">Science Stream</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <h3>Secondary Education</h3>
+                                <span class="year">10th Grade</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="grade">Percentage: 83%</p>
+                                <div class="highlights">
+                                    <span class="highlight">Strong Foundation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section id="internships" class="section internships-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">Experience & Internships</h2>
+                <div class="section-subtitle">My professional journey</div>
+            </div>
+            
+            <div class="internships-grid">
+                <div class="internship-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>IIT Madras</h3>
+                        <p class="role">Python Programming</p>
+                        <p class="duration">July 2022</p>
+                        <div class="skills-used">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Data Structures</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="internship-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Durga Tech</h3>
+                        <p class="role">Web Development</p>
+                        <p class="duration">April 2023</p>
+                        <div class="skills-used">
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="internship-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>United CAD</h3>
+                        <p class="role">Cybersecurity & Cryptography</p>
+                        <p class="duration">July - August 2024</p>
+                        <div class="skills-used">
+                            <span class="skill-tag">Security</span>
+                            <span class="skill-tag">Encryption</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="internship-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Zscaler</h3>
+                        <p class="role">Cloud Security & Zero Trust</p>
+                        <p class="duration">July - September 2024</p>
+                        <div class="skills-used">
+                            <span class="skill-tag">Cloud Security</span>
+                            <span class="skill-tag">Zero Trust</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="internship-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>AICTE + Shell India + Edunet</h3>
+                        <p class="role">AI & Data Analytics with Green Skills</p>
+                        <p class="duration">4-week Virtual Internship</p>
+                        <div class="skills-used">
+                            <span class="skill-tag">AI</span>
+                            <span class="skill-tag">Data Analytics</span>
+                            <span class="skill-tag">Green Tech</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-subtitle">Some of my notable work</div>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://agritoday.netlify.app/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28/AgriToday" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>AgriToday - Agricultural Marketplace</h3>
+                        <p>A comprehensive agricultural marketplace connecting farmers, buyers, and transporters with role-specific dashboards, secure payments, and multilingual support</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Payment Gateway</span>
+                            <span class="tech-tag">Marketplace</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://poorvajan28.github.io/Poorvajan-Portfolio/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28/Poorvajan-Portfolio" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Enhanced Portfolio Website</h3>
+                        <p>Modern 3D animated portfolio with interactive features, particle effects, and responsive design showcasing professional development skills</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">3D Animations</span>
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Poorvajan28/HACKATHON" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28/HACKATHON" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Hackathon Project</h3>
+                        <p>Python-based project developed during a hackathon showcasing problem-solving and coding skills</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Problem Solving</span>
+                            <span class="tech-tag">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Poorvajan28/731622104059" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28/731622104059" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Academic Project</h3>
+                        <p>JavaScript-based academic project demonstrating web development skills and modern programming practices</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Web Development</span>
+                            <span class="tech-tag">Academic</span>
+                            <span class="tech-tag">Frontend</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Poorvajan28" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28/Poorvajan28" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>GitHub Profile</h3>
+                        <p>My GitHub profile README showcasing my coding journey, skills, and contributions to open source</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GitHub</span>
+                            <span class="tech-tag">Markdown</span>
+                            <span class="tech-tag">Open Source</span>
+                            <span class="tech-tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Poorvajan28?tab=repositories" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Poorvajan28" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>More Projects</h3>
+                        <p>Explore my complete collection of projects, contributions, and coding experiments on GitHub</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Various Languages</span>
+                            <span class="tech-tag">Full Stack</span>
+                            <span class="tech-tag">Mobile Apps</span>
+                            <span class="tech-tag">Web Apps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-subtitle">Let's work together</div>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>poorvajan28@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 6381672467</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Tamil Nadu, India</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Poorvajan G S</h3>
+                    <p>Building the future with code</p>
+                </div>
+                <div class="footer-center">
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/poorvajan-g-s-98a1a1269" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Poorvajan28" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:poorvajan28@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <p>&copy; 2025 Poorvajan G S. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+            <h2>Let's Work Together</h2>
+            <form class="modal-form" method="post" action="mailto:poorvajan28@gmail.com">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="company" placeholder="Company (Optional)">
+                <textarea name="message" placeholder="Project Description" required></textarea>
+                <button type="submit" class="submit-btn">
+                    <span>Send Proposal</span>
+                    <i class="fas fa-rocket"></i>
+                </button>
+            </form>
+        </div>
     </div>
-  </section>
 
-  <section id="education" class="section fade-in">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>B.E. CSE</strong>, KSR Institute for Engineering and Technology (2022 - 2026) | CGPA: 7.56</li>
-      <li>12th Grade – 63%</li>
-      <li>10th Grade – 83%</li>
-    </ul>
-  </section>
-
-  <section id="internships" class="section fade-in">
-    <h2>Internships</h2>
-    <ul>
-      <li><strong>IIT Madras:</strong> Python Programming (July 2022)</li>
-      <li><strong>Durga Tech:</strong> Web Development (April 2023)</li>
-      <li><strong>United CAD:</strong> Cybersecurity & Cryptography (July–Aug 2024)</li>
-      <li><strong>Zscaler:</strong> Cloud Security & Zero Trust (Jul–Sep 2024)</li>
-      <li><strong>AICTE + Shell India + Edunet:</strong> 4-week Virtual Internship on AI & Data Analytics with Green Skills</li>
-    </ul>
-  </section>
-
-  <section id="contact" class="section fade-in">
-    <h2>Contact</h2>
-    <p>Email: poorvajan28@gmail.com | Phone: +91 6381672467</p>
-    <div class="socials">
-      <a href="https://github.com/Poorvajan28" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/poorvajan-g-s-98a1a1269" target="_blank"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Poorvajan G S. All rights reserved.</p>
-  </footer>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
-      <h2>Hire Me</h2>
-      <form method="post" action="mailto:poorvajan28@gmail.com">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Purpose" required></textarea>
-        <button type="submit" class="btn">Send</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    const faders = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    faders.forEach(fade => observer.observe(fade));
-  </script>
-
-  
-
-  
+    <script src="script.js"></script>
 </body>
-
 </html>
