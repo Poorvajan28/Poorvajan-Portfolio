@@ -8,18 +8,33 @@
     --primary-color: #00d4ff;
     --secondary-color: #ff6b6b;
     --accent-color: #4ecdc4;
-    --text-primary: #ffffff;
-    --text-secondary: #a8b2d1;
     --bg-primary: #0a0a0a;
     --bg-secondary: #1a1a1a;
-    --bg-card: rgba(30, 30, 30, 0.8);
-    --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0072ff 100%);
-    --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-    --gradient-accent: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
-    --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.3);
+    --bg-card-dark: rgba(30, 30, 30, 0.8);
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: #a8b2d1;
+    --gradient-primary-dark: linear-gradient(135deg, #00d4ff 0%, #0072ff 100%);
+
+    /* Light Theme Colors */
+    --text-primary-light: #0f172a;
+    --text-secondary-light: #334155;
+    --bg-card-light: rgba(255, 255, 255, 0.9);
+    --gradient-primary-light: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+    --gradient-secondary-light: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+    --gradient-accent-light: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+    --shadow-glow-light: 0 0 30px rgba(37, 99, 235, 0.4);
+    --primary-color-light: #2563eb;
+    --secondary-color-light: #dc2626;
+    --accent-color-light: #059669;
+
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
     --border-radius: 15px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --bg-card: var(--bg-card-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --gradient-primary: var(--gradient-primary-dark);
 }
 
 /* Reset and Base Styles */
@@ -34,6 +49,27 @@ html {
     overflow-x: hidden;
 }
 
+body.light-theme {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --bg-card: var(--bg-card-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --gradient-primary: var(--gradient-primary-light);
+    --primary-color: var(--primary-color-light);
+    --secondary-color: var(--secondary-color-light);
+    --accent-color: var(--accent-color-light);
+}
+
+body.dark-theme {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-card: var(--bg-card-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --gradient-primary: var(--gradient-primary-dark);
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-primary);
@@ -41,6 +77,19 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+}
+
+/* Explicitly set dark theme as default */
+body:not(.light-theme) {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-card: var(--bg-card-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --gradient-primary: var(--gradient-primary-dark);
+    --primary-color: #00d4ff;
+    --secondary-color: #ff6b6b;
+    --accent-color: #4ecdc4;
 }
 
 /* 3D Background Canvas */
@@ -52,6 +101,10 @@ body {
     height: 100%;
     z-index: -2;
     background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+body.light-theme #bg-canvas {
+    background: linear-gradient(45deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
 }
 
 /* Animated Particles */
@@ -69,6 +122,15 @@ body {
     animation: particleFloat 20s ease-in-out infinite;
 }
 
+/* Light theme particles with different colors and slower animation */
+body.light-theme #particles-container {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(5, 150, 105, 0.08) 0%, transparent 50%);
+    animation: particleFloatLight 25s ease-in-out infinite;
+}
+
 @keyframes particleFloat {
     0%, 100% {
         transform: translateY(0px) rotate(0deg);
@@ -81,6 +143,26 @@ body {
     66% {
         transform: translateY(10px) rotate(240deg);
         filter: hue-rotate(240deg);
+    }
+}
+
+/* Light theme specific particle animation */
+@keyframes particleFloatLight {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        filter: brightness(1) saturate(1);
+    }
+    25% {
+        transform: translateY(-10px) rotate(90deg);
+        filter: brightness(1.1) saturate(1.2);
+    }
+    50% {
+        transform: translateY(-15px) rotate(180deg);
+        filter: brightness(1.2) saturate(1.1);
+    }
+    75% {
+        transform: translateY(-5px) rotate(270deg);
+        filter: brightness(1.1) saturate(1.3);
     }
 }
 
@@ -151,6 +233,11 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
     transition: var(--transition);
+}
+
+body.light-theme .navbar {
+    background: rgba(248, 250, 252, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -236,6 +323,82 @@ body {
     transition: var(--transition);
 }
 
+/* Theme Toggle Styles */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.theme-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition);
+    border-radius: 50%;
+}
+
+.theme-toggle:hover::before {
+    opacity: 0.2;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    z-index: 2;
+    transition: var(--transition);
+}
+
+body.light-theme .theme-toggle {
+    background: rgba(30, 30, 30, 0.1);
+    border: 2px solid #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(59, 130, 246, 0.1);
+    animation: themeToggleGlow 2s ease-in-out infinite alternate;
+}
+
+body.light-theme .theme-toggle:hover {
+    box-shadow: 0 5px 25px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.6), inset 0 0 15px rgba(59, 130, 246, 0.2);
+    transform: scale(1.15) rotate(180deg);
+    border-color: #2563eb;
+}
+
+@keyframes themeToggleGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), inset 0 0 15px rgba(59, 130, 246, 0.2);
+        border-color: #2563eb;
+    }
+}
+
 /* Hero Section */
 .hero-section {
     min-height: 100vh;
@@ -245,7 +408,10 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
-    padding: 2rem;
+    padding: 6rem 2rem 4rem;
+    padding-top: calc(80px + 2rem); /* Account for navbar height */
+    overflow: hidden;
+    isolation: isolate; /* Create stacking context */
 }
 
 .hero-content {
@@ -257,19 +423,33 @@ body {
 .profile-container {
     position: relative;
     margin-bottom: 3rem;
+    margin-top: 2rem;
     transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    z-index: 5;
 }
 
 .profile-img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid var(--primary-color);
     position: relative;
-    z-index: 3;
+    z-index: 10;
     transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     animation: profileFloat 6s ease-in-out infinite;
+    display: block;
+    margin: 0 auto;
+}
+
+body.light-theme .profile-img {
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
 }
 
 .profile-ring,
@@ -356,6 +536,34 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: gradientShift 3s ease-in-out infinite;
+}
+
+/* Enhanced light theme hero text animations */
+body.light-theme .name-text {
+    animation: gradientShift 3s ease-in-out infinite, heroTextFloat 4s ease-in-out infinite;
+}
+
+body.light-theme .hero-title {
+    animation: heroTitleBounce 3s ease-in-out infinite;
+}
+
+body.light-theme .hero-subtitle {
+    animation: heroSubtitleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes heroTextFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes heroTitleBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes heroSubtitleGlow {
+    0% { text-shadow: 0 0 5px rgba(37, 99, 235, 0.3); }
+    100% { text-shadow: 0 0 15px rgba(37, 99, 235, 0.6), 0 0 25px rgba(37, 99, 235, 0.4); }
 }
 
 @keyframes gradientShift {
@@ -449,6 +657,41 @@ body {
     box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
 }
 
+/* Enhanced light theme CTA buttons */
+body.light-theme .cta-btn {
+    animation: ctaButtonFloat 3s ease-in-out infinite;
+}
+
+body.light-theme .primary-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.4), 0 0 30px rgba(37, 99, 235, 0.3);
+    animation: ctaButtonPulse 0.8s ease-in-out;
+}
+
+body.light-theme .secondary-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3), 0 0 25px rgba(37, 99, 235, 0.2);
+    background: rgba(37, 99, 235, 0.1);
+    animation: ctaButtonGlow 0.8s ease-in-out;
+}
+
+@keyframes ctaButtonFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes ctaButtonPulse {
+    0% { transform: translateY(-5px) scale(1.05); }
+    50% { transform: translateY(-8px) scale(1.08); }
+    100% { transform: translateY(-5px) scale(1.05); }
+}
+
+@keyframes ctaButtonGlow {
+    0% { box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3), 0 0 25px rgba(37, 99, 235, 0.2); }
+    50% { box-shadow: 0 25px 50px rgba(37, 99, 235, 0.4), 0 0 35px rgba(37, 99, 235, 0.3); }
+    100% { box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3), 0 0 25px rgba(37, 99, 235, 0.2); }
+}
+
 .social-links {
     display: flex;
     justify-content: center;
@@ -496,6 +739,28 @@ body {
 .social-link:hover {
     transform: translateY(-5px) rotateY(360deg);
     box-shadow: var(--shadow-glow);
+}
+
+/* Enhanced light theme social links with pulsing glow */
+body.light-theme .social-link {
+    animation: socialLinkFloat 3s ease-in-out infinite;
+}
+
+body.light-theme .social-link:hover {
+    transform: translateY(-8px) rotateY(360deg) scale(1.1);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4), 0 0 20px rgba(37, 99, 235, 0.3);
+    animation: socialLinkPulse 0.6s ease-in-out;
+}
+
+@keyframes socialLinkFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+@keyframes socialLinkPulse {
+    0% { transform: translateY(-8px) rotateY(0deg) scale(1.1); }
+    50% { transform: translateY(-12px) rotateY(180deg) scale(1.15); }
+    100% { transform: translateY(-8px) rotateY(360deg) scale(1.1); }
 }
 
 .tooltip {
@@ -590,6 +855,33 @@ body {
     box-shadow: var(--shadow-card);
 }
 
+/* Enhanced light theme about card animations */
+body.light-theme .about-card {
+    animation: cardGentleFloat 5s ease-in-out infinite;
+}
+
+body.light-theme .about-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.2), 0 0 30px rgba(37, 99, 235, 0.1);
+    animation: cardHoverPulse 0.6s ease-in-out;
+}
+
+@keyframes cardGentleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(0.5deg); }
+}
+
+@keyframes cardHoverPulse {
+    0% { transform: translateY(-8px) scale(1.02); }
+    50% { transform: translateY(-12px) scale(1.04); }
+    100% { transform: translateY(-8px) scale(1.02); }
+}
+
+body.light-theme .about-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
 .card-glow {
     position: absolute;
     top: -2px;
@@ -660,6 +952,12 @@ body {
     animation: float 8s ease-in-out infinite;
 }
 
+/* Light theme shapes have different animation */
+body.light-theme .shape {
+    animation: floatGentle 10s ease-in-out infinite;
+    opacity: 0.08;
+}
+
 .shape-1 {
     width: 80px;
     height: 80px;
@@ -674,6 +972,10 @@ body {
     top: 60%;
     right: 20%;
     animation-delay: 2s;
+    background: var(--gradient-secondary-light);
+}
+
+body.dark-theme .shape-2 {
     background: var(--gradient-secondary);
 }
 
@@ -683,6 +985,10 @@ body {
     bottom: 10%;
     left: 30%;
     animation-delay: 4s;
+    background: var(--gradient-accent-light);
+}
+
+body.dark-theme .shape-3 {
     background: var(--gradient-accent);
 }
 
@@ -698,6 +1004,14 @@ body {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
     33% { transform: translateY(-20px) rotate(120deg); }
     66% { transform: translateY(10px) rotate(240deg); }
+}
+
+/* Light theme specific floating animation */
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-15px) rotate(60deg) scale(1.05); }
+    50% { transform: translateY(-10px) rotate(120deg) scale(1.1); }
+    75% { transform: translateY(-5px) rotate(180deg) scale(1.05); }
 }
 
 /* Skills Section */
@@ -758,6 +1072,11 @@ body {
     animation: iconPulse 3s ease-in-out infinite;
 }
 
+/* Light theme skill icons have different animation */
+body.light-theme .skill-icon {
+    animation: iconBounce 4s ease-in-out infinite;
+}
+
 .skill-icon i {
     font-size: 2rem;
     color: white;
@@ -766,6 +1085,137 @@ body {
 @keyframes iconPulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
+}
+
+/* Light theme specific icon animation */
+@keyframes iconBounce {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.05) rotate(5deg); }
+    50% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.05) rotate(3deg); }
+}
+
+/* Dark theme optimized animations */
+body:not(.light-theme) .skill-card {
+    animation: darkCardGlow 8s ease-in-out infinite;
+}
+
+body:not(.light-theme) .skill-card:hover {
+    transform: translateY(-8px) rotateX(3deg);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.2);
+    animation: darkCardHover 1s ease-in-out;
+}
+
+body:not(.light-theme) .about-card {
+    animation: darkCardFloat 10s ease-in-out infinite;
+}
+
+body:not(.light-theme) .about-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 212, 255, 0.15);
+    animation: darkCardHoverSlow 1.2s ease-in-out;
+}
+
+body:not(.light-theme) .project-card {
+    animation: darkProjectFloat 12s ease-in-out infinite;
+}
+
+body:not(.light-theme) .project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+    animation: darkProjectHover 1s ease-in-out;
+}
+
+body:not(.light-theme) .social-link {
+    animation: darkSocialFloat 6s ease-in-out infinite;
+}
+
+body:not(.light-theme) .social-link:hover {
+    transform: translateY(-4px) rotateY(180deg) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4), 0 0 15px rgba(0, 212, 255, 0.3);
+    animation: darkSocialHover 0.8s ease-in-out;
+}
+
+body:not(.light-theme) .cta-btn {
+    animation: darkCtaFloat 5s ease-in-out infinite;
+}
+
+body:not(.light-theme) .primary-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4), 0 0 25px rgba(0, 212, 255, 0.2);
+    animation: darkCtaPulse 0.6s ease-in-out;
+}
+
+body:not(.light-theme) .secondary-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.15);
+    background: rgba(0, 212, 255, 0.05);
+    animation: darkCtaGlow 0.6s ease-in-out;
+}
+
+/* Dark theme keyframes */
+@keyframes darkCardGlow {
+    0%, 100% { transform: translateY(0px); box-shadow: var(--shadow-card); }
+    50% { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 212, 255, 0.1); }
+}
+
+@keyframes darkCardHover {
+    0% { transform: translateY(-8px) rotateX(3deg); }
+    50% { transform: translateY(-12px) rotateX(5deg); }
+    100% { transform: translateY(-8px) rotateX(3deg); }
+}
+
+@keyframes darkCardFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-3px) rotate(0.3deg); }
+    66% { transform: translateY(-1px) rotate(-0.3deg); }
+}
+
+@keyframes darkCardHoverSlow {
+    0% { transform: translateY(-6px) scale(1.01); }
+    50% { transform: translateY(-10px) scale(1.02); }
+    100% { transform: translateY(-6px) scale(1.01); }
+}
+
+@keyframes darkProjectFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-2px) rotate(0.2deg); }
+    50% { transform: translateY(-4px) rotate(0deg); }
+    75% { transform: translateY(-1px) rotate(-0.2deg); }
+}
+
+@keyframes darkProjectHover {
+    0% { transform: translateY(-8px) scale(1.02); }
+    50% { transform: translateY(-12px) scale(1.03); }
+    100% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes darkSocialFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-2px) rotate(2deg); }
+}
+
+@keyframes darkSocialHover {
+    0% { transform: translateY(-4px) rotateY(0deg) scale(1.05); }
+    50% { transform: translateY(-6px) rotateY(90deg) scale(1.08); }
+    100% { transform: translateY(-4px) rotateY(180deg) scale(1.05); }
+}
+
+@keyframes darkCtaFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-1px); }
+}
+
+@keyframes darkCtaPulse {
+    0% { transform: translateY(-4px) scale(1.03); }
+    50% { transform: translateY(-6px) scale(1.05); }
+    100% { transform: translateY(-4px) scale(1.03); }
+}
+
+@keyframes darkCtaGlow {
+    0% { box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.15); }
+    50% { box-shadow: 0 20px 45px rgba(0, 212, 255, 0.4), 0 0 30px rgba(0, 212, 255, 0.25); }
+    100% { box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.15); }
 }
 
 .skill-card h3 {
@@ -1084,6 +1534,43 @@ body {
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-glow);
+}
+
+/* Enhanced light theme project card animations */
+body.light-theme .project-card {
+    animation: projectCardFloat 6s ease-in-out infinite;
+}
+
+body.light-theme .project-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(37, 99, 235, 0.25), 0 0 40px rgba(37, 99, 235, 0.15);
+    animation: projectCardHover 0.8s ease-in-out;
+}
+
+body.light-theme .project-link {
+    animation: projectLinkPulse 2s ease-in-out infinite alternate;
+}
+
+body.light-theme .project-link:hover {
+    transform: scale(1.2) rotate(360deg);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+@keyframes projectCardFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-3px) rotate(0.5deg); }
+    66% { transform: translateY(-1px) rotate(-0.5deg); }
+}
+
+@keyframes projectCardHover {
+    0% { transform: translateY(-15px) scale(1.03); }
+    50% { transform: translateY(-20px) scale(1.05); }
+    100% { transform: translateY(-15px) scale(1.03); }
+}
+
+@keyframes projectLinkPulse {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.05) rotate(5deg); }
 }
 
 /* Contact Section */

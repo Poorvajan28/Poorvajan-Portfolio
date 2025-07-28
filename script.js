@@ -201,18 +201,41 @@ const animateSkillBars = () => {
 // Initialize skill bar animation
 window.addEventListener('load', animateSkillBars);
 
-// Parallax Effect for Hero Section
+// Parallax Effect for Hero Section (Improved)
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const profileContainer = document.querySelector('.profile-container');
     const heroText = document.querySelector('.hero-text');
+    const heroSection = document.querySelector('.hero-section');
     
-    if (profileContainer) {
-        profileContainer.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-    
-    if (heroText) {
-        heroText.style.transform = `translateY(${scrolled * 0.3}px)`;
+    if (heroSection) {
+        const heroRect = heroSection.getBoundingClientRect();
+        // Only apply parallax when hero section is visible
+        if (heroRect.bottom > 0 && heroRect.top < window.innerHeight) {
+            const heroProgress = Math.max(0, Math.min(1, (window.innerHeight - heroRect.top) / window.innerHeight));
+            
+            if (profileContainer) {
+                // Reduce parallax intensity and limit movement
+                const maxMovement = 50; // Maximum pixels to move
+                const movement = Math.min(scrolled * 0.2, maxMovement);
+                profileContainer.style.transform = `translateY(${movement}px)`;
+            }
+            
+            if (heroText) {
+                // Even less movement for text
+                const maxMovement = 30;
+                const movement = Math.min(scrolled * 0.1, maxMovement);
+                heroText.style.transform = `translateY(${movement}px)`;
+            }
+        } else if (heroRect.bottom <= 0) {
+            // Reset transforms when hero section is out of view
+            if (profileContainer) {
+                profileContainer.style.transform = 'translateY(0px)';
+            }
+            if (heroText) {
+                heroText.style.transform = 'translateY(0px)';
+            }
+        }
     }
 });
 
@@ -519,10 +542,62 @@ function addPrintStyles() {
 // Add print styles
 window.addEventListener('load', addPrintStyles);
 
+// Theme Toggle Functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+    
+    // Check for saved theme preference or default to light theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    body.className = savedTheme + '-theme';
+    
+    // Update icon based on current theme
+    updateThemeIcon(savedTheme);
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('light-theme') ? 'light' : 'dark';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Remove current theme class and add new one
+            body.className = newTheme + '-theme';
+            
+            // Save preference
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon with animation
+            updateThemeIcon(newTheme);
+            
+            // Add smooth transition effect
+            body.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                body.style.transition = '';
+            }, 300);
+        });
+    }
+}
+
+function updateThemeIcon(theme) {
+    const themeIcon = document.getElementById('themeIcon');
+    if (themeIcon) {
+        if (theme === 'light') {
+            themeIcon.className = 'fas fa-moon';
+            themeIcon.style.transform = 'rotate(0deg)';
+        } else {
+            themeIcon.className = 'fas fa-sun';
+            themeIcon.style.transform = 'rotate(180deg)';
+        }
+    }
+}
+
 // Final initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Enhanced Portfolio Loaded Successfully!');
-    console.log('Features: 3D Animations, Interactive Effects, Responsive Design');
+    console.log('Features: 3D Animations, Interactive Effects, Responsive Design, Theme Toggle');
+    
+    // Initialize theme toggle
+    initThemeToggle();
     
     // Analytics placeholder (replace with actual analytics code)
     if (typeof gtag !== 'undefined') {
